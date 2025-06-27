@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Akil Shayar ka WEB</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #222831; /* New solid color */
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: #eeeeee;
+      text-align: center;
+    }
+    h1 {
+      color: #00adb5;
+    }
+    textarea {
+      width: 90%;
+      max-width: 400px;
+      height: 100px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: none;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      background-color: #393e46;
+      color: #eeeeee;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #00adb5;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #028b91;
+    }
+    button:disabled {
+      background-color: #555;
+      cursor: wait;
+    }
+    p#result {
+      margin-top: 20px;
+      font-size: 18px;
+      white-space: pre-wrap;
+      padding: 0 20px;
+    }
+    .copy-btn {
+      margin-top: 20px;
+      background-color: red;
+      color: white;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      display: none;
+    }
+  </style>
+  <script>
+    function generateShayari() {
+      const input = document.getElementById("userInput").value.trim();
+      const result = document.getElementById("result");
+      const button = document.getElementById("generateBtn");
+      const copyBtn = document.getElementById("copyBtn");
+
+      if (input === "") {
+        result.innerText = "Kuch likho, tabhi toh Shayari banegi!";
+        return;
+      }
+
+      button.innerText = "Loading...";
+      button.disabled = true;
+      result.innerText = "";
+      copyBtn.style.display = "none";
+
+      setTimeout(() => {
+        const templates = [
+          `"${input}" kehkar tu chup ho gaya,\nPar dil mein ek toofan chhupa gaya.`,
+          `Tere alfaaz the jaise khushbu hawaon ki,\n"${input}" ne dil ko chhoo liya gaya.`,
+          `Kabhi socha na tha ki "${input}" bhi\nShayari ban jaayegi meri tanhayi mein.`,
+          `Kuch baatein bas dil se nikalti hain,\nJaise "${input}" likh kar aankhon mein nami si aayi.`,
+          `"${input}" likh kar tu chala gaya,\nPar har lafz mein ek dastaan chhod gaya.`
+        ];
+
+        const randomIndex = Math.floor(Math.random() * templates.length);
+        result.innerText = templates[randomIndex];
+
+        button.innerText = "Shayari Banao";
+        button.disabled = false;
+        copyBtn.style.display = "inline-block";
+      }, 2000);
+    }
+
+    function copyShayari() {
+      const resultText = document.getElementById("result").innerText;
+      navigator.clipboard.writeText(resultText);
+    }
+  </script>
+</head>
+<body>
+  <h1>💖 Akil Shayar ka WEB 💖</h1>
+  <textarea id="userInput" placeholder="Yahan apne jazbaat likho..."></textarea>
+  <br>
+  <button id="generateBtn" onclick="generateShayari()">Shayari Banao</button>
+  <p id="result"></p>
+  <button id="copyBtn" class="copy-btn" onclick="copyShayari()">Copy Shayari</button>
+</body>
+</html>
